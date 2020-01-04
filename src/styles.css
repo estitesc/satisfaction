@@ -1,0 +1,14 @@
+.wanter {
+  position: absolute;
+}
+
+.satisfaction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  font-size: 64px;
+  font-family: 'Courier', Courier, monospace;
+  color: #fdfdfb;
+}
