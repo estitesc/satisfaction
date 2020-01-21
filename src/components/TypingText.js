@@ -5,13 +5,14 @@ export default class TypingText extends React.Component {
   constructor(props) {
     super(props);
 
-    const randX = window.innerWidth - this.getRandomInt(2 * window.innerWidth);
-    const randY = this.getRandomInt(window.innerHeight);
+    const randX = props.winWidth - this.getRandomInt(2 * props.winWidth);
+    const randY = this.getRandomInt(props.winHeight);
     const randRotation = this.getRandomInt(360);
     const randRotation2 = this.getRandomInt(90);
     const randRotation3 = this.getRandomInt(180);
     let randTypingSpeed = this.getRandomInt(300);
     randTypingSpeed = randTypingSpeed < 40 ? 40 : randTypingSpeed;
+    const randFontSize = 10 + this.getRandomInt(20);
 
     this.state = { 
       currChar: 0,
@@ -22,9 +23,9 @@ export default class TypingText extends React.Component {
       rot: randRotation,
       rotY: randRotation2,
       rotZ: randRotation3,
+      fontSize: randFontSize,
       xTrans: 0,
       speed: randTypingSpeed,
-      // speed: 90,
     };
   }
 
@@ -88,6 +89,7 @@ export default class TypingText extends React.Component {
       color: '#000',
       left: this.state.xPos,
       top: this.state.yPos,
+      fontSize: `${this.state.fontSize}px`,
       transform: `
         perspective(400px) 
         rotate(${this.state.rot}deg)

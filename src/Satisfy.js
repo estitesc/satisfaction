@@ -7,6 +7,8 @@ import WordTypingText from './components/WordTypingText';
 class Satisfy extends Component {
   constructor(props) {
     super(props);
+    console.log("winder width", window.innerWidth);
+    console.log("winder height", window.innerHeight);
 
     const wants = WantsBlock.split("|");
 
@@ -20,6 +22,8 @@ class Satisfy extends Component {
       clock: 0,
       scrollInterval: 10,
       addLineInterval: 1000,
+      initialWindowWidth: window.innerWidth,
+      initialWindowHeight: window.innerHeight,
     };
   }
 
@@ -50,25 +54,29 @@ class Satisfy extends Component {
       });
     }
 
-    if(this.state.clock > 30000 && this.state.clock < 40000) {
+    if(this.state.clock > 40000 && this.state.clock < 50000) {
       this.setState((previousState) => ({
         scrollInterval: previousState.scrollInterval + 10,
       }));
     }
 
-    if(this.state.clock === 40000) {
+    if(this.state.clock === 50000) {
       this.setState({
         addLineInterval: 100,
         scrollInterval: 1000000,
       });
     }
 
-    if(this.state.clock === 40000) {
+    if(this.state.clock === 80000) {
       this.setState({
         addLineInterval: 1000000,
         scrollInterval: 1000000,
       });
       this.tickAddWordTypingLine();
+    }
+
+    if(this.state.clock === 120000) {
+      clearInterval(this.state.addWordTypingLine);
     }
   }
 
@@ -90,13 +98,17 @@ class Satisfy extends Component {
   }
 
   tickAddWordTypingLine() {
-    var animation = setInterval(() => {
+    var addWordTypingLine = setInterval(() => {
       // Get a random want
       let {wordByWordLines, wants} = this.state;
       const wantIndex = this.getRandomInt(wants.length);
       wordByWordLines.push(wants[wantIndex]);
       this.setState({ wordByWordLines: wordByWordLines });
-    }, 50);
+    }, 100);
+
+    this.setState({
+      addWordTypingLine: addWordTypingLine,
+    })
   }
 
   recursiveAddLine(interval) {
@@ -115,7 +127,7 @@ class Satisfy extends Component {
   }
 
   render() {
-    const { lines, wordByWordLines } = this.state;
+    const { lines, wordByWordLines, initialWindowHeight, initialWindowWidth } = this.state;
     if (!lines) { return; }
 
     return (
@@ -123,14 +135,14 @@ class Satisfy extends Component {
         <div className="">
           {lines.map((want, index) => (
             <div>
-              <TypingText ref={(ref) => {this.lineRefs[index] = ref; return true;}}>
+              <TypingText winWidth={initialWindowWidth} winHeight={initialWindowHeight} ref={(ref) => {this.lineRefs[index] = ref; return true;}}>
                 {want}
               </TypingText>
             </div>
           ))}
           {wordByWordLines.map((want, index) => (
             <div>
-              <WordTypingText ref={(ref) => {this.lineRefs[index] = ref; return true;}}>
+              <WordTypingText winWidth={initialWindowWidth} winHeight={initialWindowHeight} ref={(ref) => {this.lineRefs[index] = ref; return true;}}>
                 {want}
               </WordTypingText>
             </div>

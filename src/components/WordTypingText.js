@@ -13,6 +13,7 @@ export default class WordTypingText extends React.Component {
     const randRotation3 = this.getRandomInt(180);
     let randTypingSpeed = this.getRandomInt(300);
     randTypingSpeed = randTypingSpeed < 40 ? 40 : randTypingSpeed;
+    const randFontSize = 10 + this.getRandomInt(20);
 
     // Adding the hacky last word and then only iterating until length-1 has the desired effect of causing no re-adjustment of the text after the last line is printed, something that for whatever reason couldn't do with 
     var words = this.props.children.concat(" hacky").split(" ");
@@ -26,6 +27,7 @@ export default class WordTypingText extends React.Component {
       rot: randRotation,
       rotY: randRotation2,
       rotZ: randRotation3,
+      fontSize: randFontSize,
       // speed: randTypingSpeed,
       words: words,
       speed: 400,
@@ -91,7 +93,7 @@ export default class WordTypingText extends React.Component {
     const visibleText = {
       position: 'absolute',
       color: '#000',
-      fontSize: '24px',
+      fontSize: `${this.state.fontSize}px`,
       left: this.state.xPos,
       top: this.state.yPos,
       transform: `perspective(400px) rotate(${this.state.rot}deg) rotateY(${this.state.rotY}deg) rotateZ(${this.state.rotZ}deg)`,
