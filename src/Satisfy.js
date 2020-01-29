@@ -24,6 +24,7 @@ class Satisfy extends Component {
       addLineInterval: 1000,
       initialWindowWidth: window.innerWidth,
       initialWindowHeight: window.innerHeight,
+      showSatisfaction: false,
     };
   }
 
@@ -67,15 +68,20 @@ class Satisfy extends Component {
       });
     }
 
-    if(this.state.clock === 80000) {
+    if(this.state.clock === 65000) {
       this.setState({
         addLineInterval: 1000000,
-        scrollInterval: 1000000,
       });
       this.tickAddWordTypingLine();
     }
 
-    if(this.state.clock === 120000) {
+    if(this.state.clock === 75000) {
+      this.setState({
+        showSatisfaction: true,
+      });
+    }
+
+    if(this.state.clock === 100000) {
       clearInterval(this.state.addWordTypingLine);
     }
   }
@@ -104,7 +110,7 @@ class Satisfy extends Component {
       const wantIndex = this.getRandomInt(wants.length);
       wordByWordLines.push(wants[wantIndex]);
       this.setState({ wordByWordLines: wordByWordLines });
-    }, 100);
+    }, 70);
 
     this.setState({
       addWordTypingLine: addWordTypingLine,
@@ -127,8 +133,13 @@ class Satisfy extends Component {
   }
 
   render() {
-    const { lines, wordByWordLines, initialWindowHeight, initialWindowWidth } = this.state;
+    const { lines, wordByWordLines, initialWindowHeight, initialWindowWidth, showSatisfaction } = this.state;
     if (!lines) { return; }
+
+    const width = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth;
+    const isDesktop = width >= 768;
 
     return (
       <div>
@@ -148,7 +159,9 @@ class Satisfy extends Component {
             </div>
           ))}
         </div>
-        <div className="satisfaction">satisfaction</div>
+        {
+          showSatisfaction && isDesktop ? <div className="satisfaction">satisfaction</div> : null
+        }
       </div>
     );
   }
