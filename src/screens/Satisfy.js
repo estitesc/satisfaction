@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './styles.css';
-import { WantsBlock } from './Dictionary';
-import TypingText from './components/TypingText';
-import WordTypingText from './components/WordTypingText';
+import '../styles.css';
+import { WantsBlock } from '../Dictionary';
+import TypingText from '../components/TypingText';
+import WordTypingText from '../components/WordTypingText';
 
 class Satisfy extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class Satisfy extends Component {
     console.log("winder width", window.innerWidth);
     console.log("winder height", window.innerHeight);
 
-    const wants = WantsBlock.split("|");
+    // const wants = WantsBlock.split("|");
 
     this.lineRefs = [];
     this.wordByWordLineRefs = [];
@@ -18,7 +18,7 @@ class Satisfy extends Component {
     this.state = {
       lines: [],
       wordByWordLines: [],
-      wants: wants,
+      wants: this.props.wantsArray,
       clock: 0,
       scrollInterval: 10,
       addLineInterval: 1000,

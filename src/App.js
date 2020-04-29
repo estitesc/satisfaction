@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Satisfy from './Satisfy';
+import Master from './screens/Master';
 
 function App() {
   return (
     <div className="App">
-      <Satisfy />
+      <Master />
     </div>
   );
 }

@@ -37,3 +37,96 @@
     visibility: visible;
   }
 }
+
+.want-main {
+  width: 100%;
+  height: 100%;
+  white-space: normal;
+}
+
+.want-form-container {
+  position: absolute;
+  margin-top: 10vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.want-form-label {
+  font-size: 28px;
+}
+
+.want-form-sub-label {
+  font-size: 14px;
+  margin-top: 3vh;
+}
+
+.want-textarea {
+  margin-top: 3vh;
+  width: 80vw;
+  height: 30vh;
+  font-family: inherit;
+}
+
+.want-submit-container {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+}
+
+.want-submit-button {
+  margin-top: 3vh;
+  width: 20vw;
+  white-space: normal;
+  background-color: white;
+  border: solid 1px black;
+  color: black;
+  font-size: 14px;
+  padding: 6px;
+  font-family: inherit;
+}
+.want-submit-button:hover {
+  background: #eeeeee;
+  transform: scale(1.05);
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+.want-submit-button:focus {
+  outline:none;
+}
+
+.want-submit-sub-link {
+  margin-top: 3vh;
+}
+
+.text-button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+.text-button:hover {
+  transform: scale(1.05);
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+.text-button:focus {
+  outline:none;
+}
+
+.flash-main {
+  width: 100%;
+  height: 100%;
+  white-space: normal;
+}
+
+.flash-container {
+  position: absolute;
+  margin-top: 20vh;
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+
+.flash-message {
+  font-size: 28px;
+}
