@@ -38,6 +38,7 @@ export default class WhatDoYouWant extends React.Component {
         flashMessage: 'thank you, now you can watch your desires interacting.',
         showFlashMessage: true,
       });
+      this.props.onSetUsingUserWants(true);
       this.props.onSetWantsArray(doubleFlatFilt);
 
       setTimeout(() => {
@@ -60,9 +61,10 @@ export default class WhatDoYouWant extends React.Component {
 
   handleNoYouGo() {
     this.setState({
-      flashMessage: "Ok, I'll tell you what I want, but be warned, the truth contains a lot of sexual content.",
+      flashMessage: "Ok, I'll tell you what I want, but be content-warned, the truth is sexually explicit.",
       showFlashMessage: true,
     });
+    this.props.onSetUsingUserWants(false);
     this.props.onSetWantsArray(WantsBlock.split("|"));
 
     setTimeout(() => {
@@ -71,6 +73,11 @@ export default class WhatDoYouWant extends React.Component {
   }
 
   render() {
+    const width = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth;
+    const isMobile = width < 600;
+  
     return (
       this.state.showFlashMessage ?
       <FlashMessage message={this.state.flashMessage}/>
@@ -81,7 +88,10 @@ export default class WhatDoYouWant extends React.Component {
             What do you want?
           </div>
           <div className="want-form-sub-label">
-            Type or paste in all your desires to see them converted into an animated poem. The recommendation is to spend at least 15 minutes writing down everything that feels true to you in the format "I want X". Each want should be delineated by a new line or a period.
+            {!isMobile ? 'Type or paste in all your desires to see them converted into an animated poem.' : null} Recommendation: spend at least 15 minutes writing down everything that feels true to you in the format "I want X". Each want should be delineated by a new line or a period. {!isMobile ? 'The more the better.' : null} 
+          </div>
+          <div className="want-form-sub-label">
+            Text entered here is private and not uploaded{!isMobile ? ' or stored in any way' : null}. After the animation you'll have a chance to view it again but if you refresh, it will be gone forever.
           </div>
           <textarea className="want-textarea" value={this.props.userWants} onChange={(event) => (this.handleChange(event))}></textarea>
           <div className="want-submit-container">

@@ -30,8 +30,17 @@ class Satisfy extends Component {
     this.recursiveAddLine(this.state.addLineInterval);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.tick);
+    clearInterval(this.tickType);
+    clearInterval(this.tickScroll);
+    clearInterval(this.addWordTypingLine);
+
+    clearTimeout(this.animation);
+  }
+
   tick() {
-    var tick = setInterval(() => {
+    this.tick = setInterval(() => {
       this.setState((previousState) =>   ({
         clock: previousState.clock + 100,
       }));
@@ -78,7 +87,7 @@ class Satisfy extends Component {
   }
 
   tickType() {
-    var tickType = setInterval(() => {
+    this.tickType = setInterval(() => {
       this.lineRefs.forEach((lineRef) => {
         lineRef.tickType();
       });
@@ -86,7 +95,7 @@ class Satisfy extends Component {
   }
 
   recursiveTickScroll(interval) {
-    var tickScroll = setTimeout(() => {
+    this.tickScroll = setTimeout(() => {
       this.lineRefs.forEach((lineRef) => {
         lineRef.tickScroll();
       });
@@ -95,21 +104,17 @@ class Satisfy extends Component {
   }
 
   tickAddWordTypingLine() {
-    var addWordTypingLine = setInterval(() => {
+    this.addWordTypingLine = setInterval(() => {
       // Get a random want
       let {wordByWordLines, wants} = this.state;
       const wantIndex = this.getRandomInt(wants.length);
       wordByWordLines.push(wants[wantIndex]);
       this.setState({ wordByWordLines: wordByWordLines });
     }, 70);
-
-    this.setState({
-      addWordTypingLine: addWordTypingLine,
-    })
   }
 
   recursiveAddLine(interval) {
-    var animation = setTimeout(() => {
+    this.animation = setTimeout(() => {
       // Get a random want
       let {lines, wants} = this.state;
       const wantIndex = this.getRandomInt(wants.length);
@@ -136,14 +141,14 @@ class Satisfy extends Component {
       <div>
         <div className="">
           {lines.map((want, index) => (
-            <div>
+            <div key={index}>
               <TypingText winWidth={initialWindowWidth} winHeight={initialWindowHeight} ref={(ref) => {this.lineRefs[index] = ref; return true;}}>
                 {want}
               </TypingText>
             </div>
           ))}
           {wordByWordLines.map((want, index) => (
-            <div>
+            <div key={index}>
               <WordTypingText winWidth={initialWindowWidth} winHeight={initialWindowHeight} ref={(ref) => {this.lineRefs[index] = ref; return true;}}>
                 {want}
               </WordTypingText>
@@ -152,6 +157,20 @@ class Satisfy extends Component {
         </div>
         {
           showSatisfaction && isDesktop ? <div className="satisfaction">satisfaction</div> : null
+        }
+        {
+          this.props.usingUserWants ?
+          <div className="wants-button-container">
+            <button className="want-submit-button" onClick={() => (this.props.onSetCurrentView('wants'))}>
+              see my wants
+            </button>
+          </div>
+          :
+          <div className="wants-button-container">
+            <button className="want-submit-button" onClick={() => (this.props.onSetCurrentView('prompt'))}>
+              ok, my turn now
+            </button>
+          </div>
         }
       </div>
     );

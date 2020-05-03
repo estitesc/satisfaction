@@ -39,9 +39,11 @@
 }
 
 .want-main {
+  position: fixed;
   width: 100%;
   height: 100%;
   white-space: normal;
+  overflow-y: scroll;
 }
 
 .want-form-container {
@@ -49,6 +51,7 @@
   margin-top: 10vh;
   margin-left: 10vw;
   margin-right: 10vw;
+  padding-bottom: 5vh;
 }
 
 .want-form-label {
@@ -129,4 +132,10 @@
 
 .flash-message {
   font-size: 28px;
+}
+
+.wants-button-container {
+  position: absolute;
+  bottom: 3vh;
+  right: 2vw;
 }
