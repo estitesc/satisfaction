@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import '../styles.css';
-import { WantsBlock } from '../Dictionary';
 import TypingText from '../components/TypingText';
 import WordTypingText from '../components/WordTypingText';
 
 class Satisfy extends Component {
   constructor(props) {
     super(props);
-    console.log("winder width", window.innerWidth);
-    console.log("winder height", window.innerHeight);
-
-    // const wants = WantsBlock.split("|");
 
     this.lineRefs = [];
     this.wordByWordLineRefs = [];
@@ -45,10 +40,6 @@ class Satisfy extends Component {
   }
 
   checkAnimationPhase() {
-    if(this.state.clock === 3000) {
-      console.log("three seconds elapsed");
-    }
-
     if(this.state.clock === 15000) {
       this.setState({
         addLineInterval: 300,

@@ -11,8 +11,8 @@ export default class WordTypingText extends React.Component {
     const randRotation = this.getRandomInt(360);
     const randRotation2 = this.getRandomInt(90);
     const randRotation3 = this.getRandomInt(180);
-    let randTypingSpeed = this.getRandomInt(300);
-    randTypingSpeed = randTypingSpeed < 40 ? 40 : randTypingSpeed;
+    // let randTypingSpeed = this.getRandomInt(300);
+    // randTypingSpeed = randTypingSpeed < 40 ? 40 : randTypingSpeed;
     const randFontSize = 10 + this.getRandomInt(20);
 
     // Adding the hacky last word and then only iterating until length-1 has the desired effect of causing no re-adjustment of the text after the last line is printed, something that for whatever reason couldn't do with 
@@ -75,8 +75,8 @@ export default class WordTypingText extends React.Component {
   render() {
     const {words} = this.state;
 
-    var overallString = this.state.text;
-    var overallStringLength = this.state.text.length;
+    // var overallString = this.state.text;
+    // var overallStringLength = this.state.text.length;
 
     var visibleString = "";
     if(this.state.currWord > 0) {
